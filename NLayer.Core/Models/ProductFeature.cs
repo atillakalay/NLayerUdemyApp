@@ -1,6 +1,6 @@
 ﻿
 
-namespace NLayer.Core
+namespace NLayer.Core.Models
 {
     public class ProductFeature
     {

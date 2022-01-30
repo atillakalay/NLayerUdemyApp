@@ -1,4 +1,6 @@
 ﻿
+using NLayer.Core.Models;
+
 namespace NLayer.Core
 {
     public class Product:BaseEntity
