@@ -4,7 +4,7 @@ using NLayer.Core;
 
 namespace NLayer.Repository.Configurations
 {
-    public class ProductConfiguration:IEntityTypeConfiguration<Product>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
@@ -19,7 +19,7 @@ namespace NLayer.Repository.Configurations
 
             builder.ToTable("Products");
 
-            builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x=>x.CategoryId);
+            builder.HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using NLayer.Core.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using NLayer.Core.Repositories;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 
 namespace NLayer.Repository.Repositories
 {
@@ -57,7 +57,7 @@ namespace NLayer.Repository.Repositories
 
         public void RemoveRange(IEnumerable<T> entities)
         {
-          _dbSet.RemoveRange(entities);
+            _dbSet.RemoveRange(entities);
         }
     }
 }

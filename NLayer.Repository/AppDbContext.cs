@@ -1,15 +1,15 @@
-﻿using System.Reflection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NLayer.Core;
 using NLayer.Core.Models;
+using System.Reflection;
 
 namespace NLayer.Repository
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -28,13 +28,13 @@ namespace NLayer.Repository
                 Width = 200,
                 ProductId = 1
             }, new ProductFeature()
-                {
-                    Id = 2,
-                    Color = "Mavi",
-                    Height = 150,
-                    Width = 300,
-                    ProductId = 2
-                }
+            {
+                Id = 2,
+                Color = "Mavi",
+                Height = 150,
+                Width = 300,
+                ProductId = 2
+            }
 
             );
 

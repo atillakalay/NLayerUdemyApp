@@ -1,10 +1,10 @@
-using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using NLayer.Repository;
 using NLayer.Service.Service.Mapping;
 using NLayer.Web.Modules;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
