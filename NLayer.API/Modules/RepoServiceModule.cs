@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -8,6 +7,7 @@ using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWork;
 using NLayer.Service.Service;
 using NLayer.Service.Service.Mapping;
+using System.Reflection;
 using Module = Autofac.Module;
 
 namespace NLayer.API.Modules
