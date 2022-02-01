@@ -11,6 +11,7 @@
 	<td>Stock</td>
 	<td>Category</td>
 	<td>CreatedDate</td>
+	<td>Actions</td>
 	</thead>
 	<tbody>
 	@foreach (var item in Model)
@@ -21,6 +22,9 @@
 			<td>@item.Price</td>
 			<td>@item.Stock</td>
 			<td>@item.category.Name</td>
+			<td>@item.CreatedDate</td>
+			<td><a class="btn btn-primary" asp-action="Save" asp-controller="Products" asp-route-id="@item.Id">Kaydet</a></td>
+			<td><a class="btn btn-warning" asp-action="Update" asp-controller="Products" asp-route-id="@item.Id">Güncelle</a></td>
 			<td>@item.CreatedDate</td>
 		</tr>
 	}
