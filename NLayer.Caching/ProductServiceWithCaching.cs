@@ -3,9 +3,11 @@ using NLayer.Core.DTOs;
 using NLayer.Service.Service;
 using System.Linq.Expressions;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using NLayer.Core.Repositories;
 using NLayer.Core.UnitOfWorks;
+using NLayer.Service.Exceptions;
 
 namespace NLayer.Caching
 {
@@ -27,23 +29,37 @@ namespace NLayer.Caching
 
             if (!_memoryCache.TryGetValue(CacheProductKey, out _))
             {
-                _memoryCache.Set(CacheProductKey, _productRepository.GetAll().ToList());
+                _memoryCache.Set(CacheProductKey, _productRepository.GetProductsWithCategoryAsync());
             }
         }
 
-        public async Task<Product> GetByIdAsync(int id)
+        public Task<Product> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var product = _memoryCache.Get<List<Product>>(CacheProductKey)
+                .FirstOrDefault(x => x.Id == id);
+            if (product is null)
+            {
+                throw new NotFoundException($"{typeof(Product).Name}({id}) not found");
+            }
+
+            return Task.FromResult(product);
         }
 
-        public async Task<IEnumerable<Product>> GetAllAsync()
+        public Task<IEnumerable<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(_memoryCache.Get<IEnumerable<Product>>(CacheProductKey));
+        }
+
+        public Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory()
+        {
+            var products = _memoryCache.Get<IEnumerable<Product>>(CacheProductKey);
+            var productsWithCategoryDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
+            return Task.FromResult(CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsWithCategoryDto));
         }
 
         public IQueryable<Product> Where(Expression<Func<Product, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _memoryCache.Get<List<Product>>(CacheProductKey).Where(expression.Compile()).AsQueryable();
         }
 
         public async Task<bool> AnyAsync(Expression<Func<Product, bool>> expression)
@@ -53,32 +69,49 @@ namespace NLayer.Caching
 
         public async Task<Product> AddAsync(Product entity)
         {
-            throw new NotImplementedException();
+            await _productRepository.AddAsync(entity);
+            await _unitOfWork.CommitAsync();
+            await CacheAllProducts();
+            return entity;
         }
 
         public async Task<IEnumerable<Product>> AddRangeAsync(IEnumerable<Product> entities)
         {
-            throw new NotImplementedException();
+            await _productRepository.AddRangeAsync(entities);
+            await _unitOfWork.CommitAsync();
+            await CacheAllProducts();
+            return entities;
         }
 
         public async Task UpdateAsync(Product entity)
         {
-            throw new NotImplementedException();
+            _productRepository.Update(entity);
+            await _unitOfWork.CommitAsync();
+            await CacheAllProducts();
+
         }
 
         public async Task RemoveAsync(Product entity)
         {
-            throw new NotImplementedException();
+            _productRepository.Remove(entity);
+            await _unitOfWork.CommitAsync();
+            await CacheAllProducts();
+
         }
 
         public async Task RemoveRange(IEnumerable<Product> entities)
         {
-            throw new NotImplementedException();
+            _productRepository.RemoveRange(entities);
+            await _unitOfWork.CommitAsync();
+            await CacheAllProducts();
+
         }
 
-        public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory()
+
+
+        public async Task CacheAllProducts()
         {
-            throw new NotImplementedException();
+            _memoryCache.Set(CacheProductKey, await _productRepository.GetAll().ToListAsync());
         }
     }
 }
