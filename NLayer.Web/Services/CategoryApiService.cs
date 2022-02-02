@@ -16,5 +16,6 @@ namespace NLayer.Web.Services
             var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<CategoryDto>>>("Categories");
             return response.Data;
         }
+
     }
 }
