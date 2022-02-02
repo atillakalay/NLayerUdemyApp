@@ -3,7 +3,7 @@ using NLayer.Core;
 using NLayer.Core.DTOs;
 using NLayer.Core.Models;
 
-namespace NLayer.Service.Service.Mapping
+namespace NLayer.Service.Services.Mapping
 {
     public class MapProfile : Profile
     {

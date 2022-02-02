@@ -5,10 +5,9 @@ using NLayer.Core.UnitOfWorks;
 using NLayer.Repository;
 using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWork;
-using NLayer.Service.Service;
-using NLayer.Service.Service.Mapping;
+using NLayer.Service.Services;
+using NLayer.Service.Services.Mapping;
 using System.Reflection;
-using NLayer.Caching;
 using Module = Autofac.Module;
 
 namespace NLayer.API.Modules
@@ -35,7 +34,7 @@ namespace NLayer.API.Modules
                 .Where(x => x.Name.EndsWith("Service")).AsImplementedInterfaces().
                 InstancePerLifetimeScope();
 
-            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
+            //builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
         }
     }
 }

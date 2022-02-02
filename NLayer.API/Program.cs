@@ -7,7 +7,7 @@ using NLayer.API.Filters;
 using NLayer.API.Middlewares;
 using NLayer.API.Modules;
 using NLayer.Repository;
-using NLayer.Service.Service.Mapping;
+using NLayer.Service.Services.Mapping;
 using NLayer.Service.Validations;
 using System.Reflection;
 

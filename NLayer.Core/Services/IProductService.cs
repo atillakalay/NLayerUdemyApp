@@ -1,11 +1,9 @@
-﻿using NLayer.Core;
-using NLayer.Core.DTOs;
-using NLayer.Core.Services;
+﻿using NLayer.Core.DTOs;
 
-namespace NLayer.Service.Service
+namespace NLayer.Core.Services
 {
     public interface IProductService : IService<Product>
     {
-        Task<List<ProductWithCategoryDto>> GetProductsWithCategory();
+        Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory();
     }
 }

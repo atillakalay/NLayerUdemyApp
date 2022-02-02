@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NLayer.Core;
 using NLayer.Core.DTOs;
 using NLayer.Core.Services;
-using NLayer.Service.Service;
 
 namespace NLayer.Web.Controllers
 {
@@ -23,7 +22,7 @@ namespace NLayer.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _productService.GetProductsWithCategory());
+            return View((await _productService.GetProductsWithCategory()).Data);
         }
 
         [HttpGet]

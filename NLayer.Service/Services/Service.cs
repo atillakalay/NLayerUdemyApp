@@ -5,7 +5,7 @@ using NLayer.Core.UnitOfWorks;
 using NLayer.Service.Exceptions;
 using System.Linq.Expressions;
 
-namespace NLayer.Service.Service
+namespace NLayer.Service.Services
 {
     public class Service<T> : IService<T> where T : class
     {

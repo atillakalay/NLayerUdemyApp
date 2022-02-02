@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using NLayer.Core.DTOs;
 using NLayer.Service.Exceptions;
+using System.Text.Json;
 
 namespace NLayer.API.Middlewares
 {

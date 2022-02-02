@@ -5,7 +5,7 @@ using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
 
-namespace NLayer.Service.Service
+namespace NLayer.Service.Services
 {
     public class CategoryService : Service<Category>, ICategoryService
     {
